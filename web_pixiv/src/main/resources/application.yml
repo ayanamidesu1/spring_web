@@ -1,0 +1,28 @@
+server:
+  port: 3344
+  error:
+    path: /error
+
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/admin
+    username: admin
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    web:
+      resources:
+        cache:
+          period: 0
+  web:
+    resources:
+      static-locations: classpath:/static/, classpath:/public/
+      add-mappings: false
+
