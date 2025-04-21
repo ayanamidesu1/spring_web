@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 
 /**
  * 系统全局配置（硬编码不可变配置）
@@ -18,6 +20,18 @@ public final class Config {
     // 初始化基础路径
     private static final String ROOT_PATH = System.getProperty("user.dir");
     public  static final String DIR=ROOT_PATH;
+    //jwt token 安全秘钥
+    // 使用Base64编码的安全秘钥（推荐）
+    public static final String SECRET_KEY_BASE64 = "mFx4uC+gGeZkxKkXzPpI8tTWRbz0S4vQb0uB9HgE6MA="; // 示例秘钥
+
+    // 获取解码后的秘钥字节
+    public static byte[] getJwtSecretBytes() {
+        byte[] decoded = Base64.getDecoder().decode(SECRET_KEY_BASE64);
+        if (decoded.length < 32) {
+            throw new IllegalStateException("JWT秘钥长度不足256位");
+        }
+        return decoded; // 已经是标准长度，不需要截断
+    }
 
     // 日志配置
     public static final class Log {
