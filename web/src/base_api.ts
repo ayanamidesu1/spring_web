@@ -12,14 +12,12 @@ export class BaseApi {
     }
 
     public async post(api = '', data: Object): Promise<{ result: Object, status: number }> {
-        console.log(this.get_token())
         try {
             const token = this.get_token()
             const res = await fetch(this.base_url + api, {
                 method: 'POST',
                 headers: {
                     'Authorization': `token ${token}`,
-                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             })
